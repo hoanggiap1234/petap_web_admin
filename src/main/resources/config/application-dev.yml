@@ -1,0 +1,95 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+logging:
+  level:
+    ROOT: DEBUG
+    org.hibernate.SQL: DEBUG
+    io.petapp: DEBUG
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: static/**
+    livereload:
+      enabled: false # we use Webpack dev server + BrowserSync for livereload
+  jackson:
+    serialization:
+      indent-output: true
+  data:
+    mongodb:
+      uri: mongodb://petapp_dev:QxnTBy6tdSB5tZMh@db1.pitagon.vn:27017/petapp_dev
+      database: petapp_dev
+  messages:
+    cache-duration: PT1S # 1 second, see the ISO 8601 standard
+  thymeleaf:
+    cache: false
+  sleuth:
+    sampler:
+      probability: 1 # report 100% of traces
+  zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
+    base-url: http://localhost:9411
+    enabled: false
+    locator:
+      discovery:
+        enabled: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+server:
+  port: 8081
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  # CORS is disabled by default on microservices, as you should access them through a gateway.
+  # If you want to enable it, please uncomment the configuration below.
+  cors:
+    allowed-origins: "http://localhost:8081,http://127.0.0.1:8081,https://api.dev.petapp.io"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "Authorization,Link,X-Total-Count"
+    allow-credentials: true
+    max-age: 1800
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        base64-secret: OGJlYjc4OTUxMzYxOTIyN2VkODJlMzFkNDJlYjY5MTljZTJlZmE1ZWMzNmQ4NmQwNTZiNDA1ZWY5Y2Q0YTY1YWE1ZDEzMTU1ZmMxM2YxZjQ3MTgwMTliN2Y3OTFhMDVjODIyOWMxNTZkMjMzZDhkYWViYzJlYWUzZDRjOTQxNzU=
+        token-validity-in-seconds: 86400 # Token is valid 24 hours
+        token-validity-in-seconds-for-remember-me: 2592000 # Token is valid 30 days
+  logging:
+    use-json-format: false # By default, logs are not in Json format
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+      enabled: false
+      host: localhost
+      port: 5000
+      queue-size: 512
+  # Hibernate 2nd level cache, used by CacheConfiguration
+  cache:
+    redis: # Redis configuration
+      server: # Server address
+        - redis://127.0.0.1:6379
+      cluster: false
+
+# ===================================================================
+# Application specific properties
+# ===================================================================
+
+application:
+  sms-brand-name:
+    client-id: dBfffd74a65d99a75708CBe567fa687df71611df
+    client-secret: b8bBeb8c0527b8Ba7E6320Bed140952dD10A6438b19b22dcac5e3193436e44fcE26fa478

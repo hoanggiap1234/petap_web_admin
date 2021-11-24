@@ -1,0 +1,10 @@
+
+  ${AnsiColor.GREEN}███████╗ ${AnsiColor.RED} ████████╗ ████████╗     ████╗     ███████╗  ███████╗
+  ${AnsiColor.GREEN}██╔═══██╗${AnsiColor.RED} ██╔═════╝ ╚══██╔══╝    ██╔╝██╗    ██╔═══██╗ ██╔═══██╗
+  ${AnsiColor.GREEN}███████╔╝${AnsiColor.RED} ██████╗      ██║      ██╔╝  ██╗   ███████╔╝ ███████╔╝
+  ${AnsiColor.GREEN}██╔════╝ ${AnsiColor.RED} ██╔═══╝      ██║     ██████████╗  ██╔════╝  ██╔════╝
+  ${AnsiColor.GREEN}██║      ${AnsiColor.RED} ████████╗    ██║    ██╔═══════██╗ ██║       ██║
+  ${AnsiColor.GREEN}╚═╝      ${AnsiColor.RED} ╚═══════╝    ╚═╝    ╚═╝       ╚═╝ ╚═╝       ╚═╝
+
+${AnsiColor.BRIGHT_BLUE}:: PetApp Service 🤓  :: Running Spring Boot ${spring-boot.version} ::
+:: https://petapp.io ::${AnsiColor.DEFAULT}

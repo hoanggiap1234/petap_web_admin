@@ -1,0 +1,125 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+mongock:
+  change-logs-scan-package:
+    - io.petapp.config.dbmigrations
+
+spring:
+  application:
+    name: PetApp Service
+  profiles:
+    # The commented value for `active` can be replaced with valid Spring profiles to load.
+    # Otherwise, it will be filled in by gradle when building the JAR file
+    # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+    active: #spring.profiles.active#
+    group:
+      dev:
+        - dev
+        - api-docs
+        # Uncomment to activate TLS for the dev profile
+        #- tls
+  jmx:
+    enabled: false
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    always-use-message-format: true
+    fallback-to-system-locale: true
+    use-code-as-default-message: true
+  main:
+    allow-bean-definition-overriding: true
+  task:
+    execution:
+      thread-name-prefix: pet-app-task-
+      pool:
+        core-size: 2
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: pet-app-scheduling-
+      pool:
+        size: 2
+  thymeleaf:
+    mode: HTML
+  output:
+    ansi:
+      console-available: true
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+# Properties to be exposed on the /info management endpoint
+info:
+  # Comma separated list of profiles that will trigger the ribbon to show
+  display-ribbon-on-profiles: 'dev'
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  clientApp:
+    name: 'PetApp Service'
+    # By default CORS is disabled. Uncomment to enable.
+#  cors:
+#    allowed-origins: "http://localhost:8100,http://localhost:9000"
+#    allowed-methods: "*"
+#    allowed-headers: "*"
+#    exposed-headers: "Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params"
+#    allow-credentials: true
+#    max-age: 1800
+  mail:
+    enabled: false # If e-mail sending is enabled. The standard `spring.mail` keys will need to be configured
+    from: system@petapp.io # The default "from" address for e-mails
+    base-url: https://petapp.io # URL to the application, used inside e-mails
+  api-docs:
+    default-include-pattern: ${server.servlet.context-path:}/api/.*
+    title: PetApp Service API
+    description: PetApp Service API documentation
+    version: 1.0.0
+    terms-of-service-url: https://petapp.io/privacy-policy
+    contact-name: Pitagon., JSC
+    contact-url: https://petapp.io
+    contact-email: contact@petapp.io
+    license: PetApp., JSC
+    license-url: https://petapp.io/license
+  security:
+    content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
+  # Hibernate 2nd level cache, used by CacheConfiguration
+  cache:
+    redis: # Redis configuration
+      expiration: 3600 # By default objects stay 1 hour (in seconds) in the cache
+      connectionPoolSize: 64
+      connectionMinimumIdleSize: 24
+      subscriptionConnectionPoolSize: 50
+      subscriptionConnectionMinimumIdleSize: 1
+
+# ===================================================================
+# Application specific properties
+# ===================================================================
+
+application:
+  sms-brand-name:
+    brand-name: PITAGON
+    app-name: PetApp
+    validity-in-minute: 3
+    mode: live
+    request-id: FROM_PETAPP_SERVICE
